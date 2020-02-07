@@ -7,6 +7,7 @@ const {
     parallel,
     watch
 } = require('gulp'),
+    compiler = require('webpack'),
     autoprefixer = require('gulp-autoprefixer'),
     webpack = require('webpack-stream'),
     sass = require('gulp-sass'),
@@ -15,14 +16,14 @@ const {
 
 const path = {
     src: {
-        base: './src/*.js',
+        base: './src/**/*.js',
         css: './src/resources/styles/**/*.{css,scss,css}',
         img: './src/resources/images/**/*.*',
     },
     dist: {
-        base: 'C:/ws/www/ws5/lib/formsbuilder',
-        css: 'C:/ws/www/ws5/lib/formsbuilder/res/css',
-        img: 'C:/ws/www/ws5/lib/formsbuilder/res/img',
+        base: 'C:/ws/www/ws5/lib/formsconstructor',
+        css: 'C:/ws/www/ws5/lib/formsconstructor/res/css',
+        img: 'C:/ws/www/ws5/lib/formsconstructor/res/img',
     },
 };
 
@@ -45,7 +46,7 @@ const base = () => {
                     use: ['babel-loader'],
                 }],
             },
-        }))
+        }, compiler, (err, stats) => err ? console.log(err) : ''))
         .pipe(dest(path.dist.base));
 }
 
