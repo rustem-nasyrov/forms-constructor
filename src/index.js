@@ -4,7 +4,7 @@ Ext.define('FormsConstructor', {
     requires: [
         'Ext.window.Toast'
     ],
-    constructor: function (id) {
-        new BuildSkeleton(id);
+    constructor: function (id, h, w) {
+        new BuildSkeleton(id, h ,w);
     },
 });

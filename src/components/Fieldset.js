@@ -1,4 +1,4 @@
-import Field from "./Field";
+import Field from './Field';
 export default class Fieldset {
     constructor(btn) {
         this.createDefaultFieldset(btn);
@@ -32,28 +32,28 @@ export default class Fieldset {
                     labelAlign: 'top',
                     emptyText: 'Группа',
                     name: 'fieldset-name',
-                    value: ''
+                    value: '',
                 },
                 {
                     fieldLabel: 'Высота',
                     labelAlign: 'top',
                     emptyText: '200 / 0px / 50% ',
                     name: 'fieldset-height',
-                    value: null
+                    value: null,
                 },
                 {
                     fieldLabel: 'Ширина',
                     labelAlign: 'top',
                     emptyText: '200 / 0px / 50% ',
                     name: 'fieldset-width',
-                    value: null
+                    value: null,
                 },
                 {
                     fieldLabel: 'Направление',
                     labelAlign: 'top',
                     xtype: 'displayfield',
-                    value: this.getLayoutDirectionTitle(btn)
-                }
+                    value: this.getLayoutDirectionTitle(btn),
+                },
             ],
             fbar: [
                 {
@@ -62,14 +62,14 @@ export default class Fieldset {
                     handler: btn => {
                         console.log(btn.up('window').getValues());
                         // this.createFieldset(btn.up('panel'), btn.up('form'));
-                    }
+                    },
                 },
                 {
                     xtype: 'button',
                     text: 'Отмена',
-                    handler: btn => btn.up('window').destroy()
-                }
-            ]
+                    handler: btn => btn.up('window').destroy(),
+                },
+            ],
         });
     }
 

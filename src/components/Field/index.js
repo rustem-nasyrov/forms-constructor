@@ -1,5 +1,6 @@
 export default class Field {
     constructor(fieldset) {
+        Field.createWrapper(fieldset);
         fieldset.add({
             xtype: 'splitbutton',
             tooltip: 'Добавить элемент',
@@ -15,11 +16,11 @@ export default class Field {
                         console.log();
                         fieldset.add({
                             xtype: fieldtype,
-                            fieldLabel: fieldtype
+                            fieldLabel: fieldtype,
                         });
-                    }
-                }
-            })
+                    },
+                },
+            }),
         });
     }
 }
@@ -29,98 +30,102 @@ Field.getComponents = () => {
         {
             text: 'Checkbox',
             autoEl: {
-                'data-field-type': 'checkboxfield'
-            }
+                'data-field-type': 'checkboxfield',
+            },
         },
         {
             text: 'Combobox',
             autoEl: {
-                'data-field-type': 'combobox'
-            }
+                'data-field-type': 'combobox',
+            },
         },
         {
             text: 'Date',
             autoEl: {
-                'data-field-type': 'datefield'
-            }
+                'data-field-type': 'datefield',
+            },
         },
         {
             text: 'Displayfield',
             autoEl: {
-                'data-field-type': 'displayfield'
-            }
+                'data-field-type': 'displayfield',
+            },
         },
         {
             text: 'File',
             autoEl: {
-                'data-field-type': 'filefield'
-            }
+                'data-field-type': 'filefield',
+            },
         },
         {
             text: 'FileButton',
             autoEl: {
-                'data-field-type': 'filebutton'
-            }
+                'data-field-type': 'filebutton',
+            },
         },
         {
             text: 'Hidden',
             autoEl: {
-                'data-field-type': 'hiddenfield'
-            }
+                'data-field-type': 'hiddenfield',
+            },
         },
         {
             text: 'HtmlEditor',
             autoEl: {
-                'data-field-type': 'htmleditor'
-            }
+                'data-field-type': 'htmleditor',
+            },
         },
         {
             text: 'Number',
             autoEl: {
-                'data-field-type': 'numberfield'
-            }
+                'data-field-type': 'numberfield',
+            },
         },
         {
             text: 'Picker',
             autoEl: {
-                'data-field-type': 'pickerfield'
-            }
+                'data-field-type': 'pickerfield',
+            },
         },
         {
             text: 'Radio',
             autoEl: {
-                'data-field-type': 'radiofield'
-            }
+                'data-field-type': 'radiofield',
+            },
         },
         {
             text: 'Spinner',
             autoEl: {
-                'data-field-type': 'spinnerfield'
-            }
+                'data-field-type': 'spinnerfield',
+            },
         },
         {
             text: 'Tag',
             autoEl: {
-                'data-field-type': 'tagfield'
-            }
+                'data-field-type': 'tagfield',
+            },
         },
         {
             text: 'Text',
             autoEl: {
-                'data-field-type': 'textfield'
-            }
+                'data-field-type': 'textfield',
+            },
         },
         {
             text: 'TextArea',
             autoEl: {
-                'data-field-type': 'textareafield'
-            }
+                'data-field-type': 'textareafield',
+            },
         },
         {
             text: 'Time',
             autoEl: {
-                'data-field-type': 'timefield'
-            }
-        }
+                'data-field-type': 'timefield',
+            },
+        },
     ];
+};
+
+Field.createWrapper = fieldset => {
+    console.log(fieldset);
 };
