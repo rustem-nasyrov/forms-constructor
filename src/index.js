@@ -1,10 +1,12 @@
-import BuildSkeleton from './components/Skeleton';
+import Layout from './components/Layout/index';
 
-Ext.define('FormsConstructor', {
-    requires: [
-        'Ext.window.Toast'
-    ],
-    constructor: function (id, h, w) {
-        new BuildSkeleton(id, h ,w);
-    },
-});
+class FormsConstructor {
+    constructor(val) {
+        new Layout(val);
+    }
+    test() {
+        console.log('test');
+    }
+}
+export default FormsConstructor;
+// module.exports = FormsConstructor;
