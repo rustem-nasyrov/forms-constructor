@@ -80,7 +80,19 @@ export default class Fieldset {
             title: '',
             scrollable: true,
             layout: this.getLayoutDirection(btn),
-            items: [],
+            items: [
+                // {
+                //     xtype: 'panel',
+                //     bodyStyle: 'background: red;',
+                //     height: 100,
+                //     width: 100,
+                // },
+            ],
+            // listeners: {
+            //     add: function(panel, cmp, idx, e) {
+            //         if (panel)
+            //     },
+            // },
         });
         new Field(fieldset);
         panel.add(fieldset);

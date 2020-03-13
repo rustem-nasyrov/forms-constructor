@@ -19,8 +19,9 @@ class BuildSkeleton {
                 align: 'stretch',
             },
             cls: 'forms-constructor',
+            flex: 1,
             height: h,
-            width: w,
+            // width: w,
             id: `${this.id}-forms-constructor`,
             items: [
                 {

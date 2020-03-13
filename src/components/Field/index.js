@@ -1,6 +1,7 @@
+import Helper from './Helper';
 export default class Field {
     constructor(fieldset) {
-        Field.createWrapper(fieldset);
+        // Field.createWrapper(fieldset);
         fieldset.add({
             xtype: 'splitbutton',
             tooltip: 'Добавить элемент',
@@ -13,10 +14,33 @@ export default class Field {
                 listeners: {
                     click: function(menu, item) {
                         let fieldtype = item.getEl().dom.dataset.fieldType;
-                        console.log();
                         fieldset.add({
                             xtype: fieldtype,
                             fieldLabel: fieldtype,
+                            style: { zIndex: 1 },
+                            listeners: {
+                                render: function() {
+                                    console.log(this.getEl());
+                                    this.getEl().on('mouseenter', function(e, el) {
+                                        let cmp = Ext.getCmp(this.id);
+                                        let helper = Ext.getCmp('helper');
+                                        if (!helper) {
+                                            new Helper(cmp);
+                                        } else {
+                                            console.log(cmp.getXY());
+                                            helper.setWidth(cmp.getWidth());
+                                            helper.setHeight(cmp.getHeight());
+                                            helper.setXY([0, 0]);
+                                            helper.setXY(cmp.getXY());
+                                            helper.show();
+                                        }
+                                    });
+                                    this.getEl().on('mouseout', function(e, el) {
+                                        // let cmp = Ext.getCmp(this.id);
+                                        if (Ext.getCmp('helper')) Ext.getCmp('helper').hide();
+                                    });
+                                },
+                            },
                         });
                     },
                 },
@@ -126,6 +150,6 @@ Field.getComponents = () => {
     ];
 };
 
-Field.createWrapper = fieldset => {
-    console.log(fieldset);
-};
+// Field.createWrapper = fieldset => {
+//     console.log(fieldset);
+// };

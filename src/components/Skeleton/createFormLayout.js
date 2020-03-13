@@ -16,7 +16,7 @@ export default function(id) {
                 height: panel.getHeight(),
                 width: panel.getWidth(),
                 style: {
-                    border: '1px dashed lightgray'
+                    border: '1px dashed lightgray',
                 },
                 items: [
                     {
@@ -32,7 +32,7 @@ export default function(id) {
                             top: '0px',
                             left: '50%',
                             transform: 'translateX(-50%)',
-                            zIndex: 10000
+                            zIndex: 10000,
                         },
                         fixed: true,
                         docked: 'top',
@@ -49,24 +49,24 @@ export default function(id) {
                                             iconCls: 'fa fa-grip-vertical',
                                             margin: 0,
                                             autoEl: {
-                                                'data-layout': 'vbox'
+                                                'data-layout': 'vbox',
                                             },
-                                            handler: btn => new Fieldset(btn)
+                                            handler: btn => new Fieldset(btn),
                                         },
                                         {
-                                            xtype: 'menuseparator'
+                                            xtype: 'menuseparator',
                                         },
                                         {
                                             text: 'Горизонтальная группа',
                                             iconCls: 'fa fa-grip-horizontal',
                                             margin: 0,
                                             autoEl: {
-                                                'data-layout': 'hbox'
+                                                'data-layout': 'hbox',
                                             },
-                                            handler: btn => new Fieldset(btn)
-                                        }
-                                    ]
-                                })
+                                            handler: btn => new Fieldset(btn),
+                                        },
+                                    ],
+                                }),
                             },
                             {
                                 tooltip: 'Настроить панель',
@@ -74,7 +74,7 @@ export default function(id) {
                                 handler: function(btn) {
                                     let [x, y] = btn.getXY();
                                     createPanelConfigurator(btn.up('panel').getId(), x, y, 160, 400);
-                                }
+                                },
                             },
                             {
                                 tooltip: 'Добавить панель сверху',
@@ -82,9 +82,9 @@ export default function(id) {
                                 iconCls: 'fa fa-plus',
                                 handler: btn => {
                                     addPanel(btn, btn.up('form').getId());
-                                }
-                            }
-                        ]
+                                },
+                            },
+                        ],
                     },
                     {
                         xtype: 'button',
@@ -99,8 +99,8 @@ export default function(id) {
                             position: 'absolute',
                             top: '50%',
                             right: '0px',
-                            transform: 'translateY(-50%)'
-                        }
+                            transform: 'translateY(-50%)',
+                        },
                     },
                     {
                         xtype: 'button',
@@ -115,8 +115,8 @@ export default function(id) {
                             position: 'absolute',
                             bottom: '0px',
                             left: '50%',
-                            transform: 'translateX(-50%)'
-                        }
+                            transform: 'translateX(-50%)',
+                        },
                     },
                     {
                         xtype: 'button',
@@ -131,11 +131,11 @@ export default function(id) {
                             position: 'absolute',
                             top: '50%',
                             left: '0px',
-                            transform: 'translateY(-50%)'
-                        }
-                    }
-                ]
-            }
-        ]
+                            transform: 'translateY(-50%)',
+                        },
+                    },
+                ],
+            },
+        ],
     });
 }
