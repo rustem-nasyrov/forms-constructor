@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path'),
     config = require('./package.json'),
-    webpack = require('webpack');
+    MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 require('dotenv').config();
 
@@ -14,9 +14,13 @@ module.exports = {
         minimize: false,
     },
     mode: process.env.NODE_ENV,
+    watch: true,
+    watchOptions: {
+        ignored: /node_modules/,
+    },
     output: {
         path: path.resolve('C:/ws/www/ws5/lib/formsconstructor', './'),
-        filename: PROD ? 'formsConstructor.min.js' : 'formsConstructor.js',
+        filename: PROD ? `${process.env.NAME}.min.js` : `${process.env.NAME}.js`,
         library: process.env.NAME,
         libraryExport: 'default',
         libraryTarget: process.env.TARGET,
@@ -28,6 +32,33 @@ module.exports = {
         port: 3000,
     },
     module: {
-        rules: [{ test: /\.js?$/, exclude: /node_modules/, use: ['babel-loader'] }],
+        rules: [
+            {
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // 'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.(png|svg|jpe?g|gif)$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'res/img',
+                },
+            },
+        ],
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: `./res/css/${process.env.NAME}.min.css`,
+        }),
+    ],
 };
