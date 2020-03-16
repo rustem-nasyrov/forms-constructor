@@ -1,6 +1,6 @@
-import Numberfield from '../Numberfield';
-import Button from '../Button';
-import Select from '../Select';
+import Numberfield from '../../components/Numberfield';
+import Button from '../../components/Button';
+import Select from '../../components/Select';
 
 class DataParser {
     constructor(inputData, elemId) {
