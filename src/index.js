@@ -1,4 +1,4 @@
-import DataParser from './components/DataParser';
+import DataParser from './Utils/DataParser';
 class FormsConstructor {
     constructor(elemId) {
         let data = {
@@ -15,22 +15,21 @@ class FormsConstructor {
                     afterLabel: 'after',
                     dataList: {
                         id: '',
-                        values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+                        values: [1, 2, 1488, 4, 5, 69, 7, 4.2, 9, 0],
                     },
                     name: 'testr',
                     readOnly: false,
                     min: 0,
-                    max: 10,
-                    step: 0.5,
+                    max: 30,
+                    step: 1,
                     value: 1,
+                    style: { height: '30px', width: '100px' },
                 },
                 {
-                    type: 'string',
+                    type: 'range',
                     renderTo: '#ws_cp-body',
-                    attrs: {},
-                    styles: {},
-                    data: {},
-                    value: 'Maurene',
+                    value: '1000',
+                    step: 10,
                 },
                 {
                     type: 'string',
@@ -102,8 +101,6 @@ class FormsConstructor {
                 },
             ],
         };
-
-        // new DataParser(JSON.stringify(data));
         new DataParser(data, elemId);
     }
 }
