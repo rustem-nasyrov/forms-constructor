@@ -3,7 +3,8 @@ class Select {
     #outerHTML = '';
 
     constructor(options) {
-        let { type = 'select', value = [], multi = false, required = false, name, size = 1 } = options;
+        let { type = 'select', value = [], multi = false, required = false, name, size = 1, renderTo } = options;
+        if (!renderTo) throw new Error(`"renderTo" does not specified!`);
         let selectElem = document.createElement('select');
         if (multi) selectElem.setAttribute('multi', multi);
         if (required) selectElem.setAttribute('required');
@@ -11,6 +12,7 @@ class Select {
         if (size >= 2) selectElem.setAttribute('size', size);
         selectElem.innerHTML = this.createOptionsList(value);
         this.#outerHTML = selectElem.outerHTML;
+        document.querySelector(renderTo).appendChild(selectElem);
     }
 
     get html() {
