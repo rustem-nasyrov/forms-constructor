@@ -2,75 +2,105 @@ import DataParser from './components/DataParser';
 class FormsConstructor {
     constructor(elemId) {
         let data = {
-            id: {
-                type: 'number',
-                attrs: {},
-                styles: {},
-                data: {},
-                value: 1,
+            form: {
+                id: 'baseID',
+                height: 400,
+                width: '100%',
             },
-            first_name: {
-                type: 'string',
-                attrs: {},
-                styles: {},
-                data: {},
-                value: 'Maurene',
-            },
-            last_name: {
-                type: 'string',
-                attrs: {},
-                styles: {},
-                data: {},
-                value: 'Idale',
-            },
-            email: {
-                type: 'email',
-                attrs: {},
-                styles: {},
-                data: {},
-                value: 'midale0@123-reg.co.uk',
-            },
-            gender: {
-                type: 'select',
-                value: [
-                    {
-                        value: 'fe',
-                        text: 'female',
+            items: [
+                {
+                    type: 'number',
+                    renderTo: '#ws_cp-body',
+                    beforeLabel: 'before',
+                    afterLabel: 'after',
+                    dataList: {
+                        id: '',
+                        values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
                     },
-                    {
-                        value: 'ma',
-                        text: 'male',
+                    name: 'testr',
+                    readOnly: false,
+                    min: 0,
+                    max: 10,
+                    step: 0.5,
+                    value: 1,
+                },
+                {
+                    type: 'string',
+                    renderTo: '#ws_cp-body',
+                    attrs: {},
+                    styles: {},
+                    data: {},
+                    value: 'Maurene',
+                },
+                {
+                    type: 'string',
+                    renderTo: '#ws_cp-body',
+                    attrs: {},
+                    styles: {},
+                    data: {},
+                    value: 'Idale',
+                },
+                {
+                    type: 'email',
+                    renderTo: '#ws_cp-body',
+                    attrs: {},
+                    styles: {},
+                    data: {},
+                    value: 'midale0@123-reg.co.uk',
+                },
+                {
+                    type: 'select',
+                    renderTo: '#ws_cp-body',
+                    value: [
+                        {
+                            value: 'fe',
+                            text: 'female',
+                        },
+                        {
+                            value: 'ma',
+                            text: 'male',
+                        },
+                        {
+                            value: 'heli',
+                            text: 'Boeing AH-64 Apache',
+                        },
+                        {
+                            value: 'another',
+                            text: 'binary',
+                        },
+                        {
+                            value: 'anothernon',
+                            text: 'nonbinary',
+                        },
+                    ],
+                },
+                {
+                    type: 'date',
+                    renderTo: '#ws_cp-body',
+                    value: '1969-04-20',
+                },
+                {
+                    type: 'string',
+                    renderTo: '#ws_cp-body',
+                    value: '188.40.87.166',
+                },
+                {
+                    value: 'Submit',
+                    type: 'submit',
+                    renderTo: '#ws_cp-body',
+                    handler: function() {
+                        console.log(this.innerText);
                     },
-                    {
-                        value: 'heli',
-                        text: 'Boeing AH-64 Apache',
+                },
+                {
+                    value: 'Submit1',
+                    type: 'button',
+                    renderTo: '#ws_cp-body',
+                    handler: function() {
+                        console.log(this.innerText);
                     },
-                    {
-                        value: 'another',
-                        text: 'binary',
-                    },
-                    {
-                        value: 'anothernon',
-                        text: 'nonbinary',
-                    },
-                ],
-            },
-            birthDate: {
-                type: 'date',
-                value: '1969-04-20',
-            },
-            ip_address: {
-                type: 'string',
-                value: '188.40.87.166',
-            },
-            button: {
-                value: 'Submit',
-                type: 'submit',
-            },
-            button1: {
-                value: 'Submit1',
-                type: 'button',
-            },
+                },
+            ],
         };
 
         // new DataParser(JSON.stringify(data));
