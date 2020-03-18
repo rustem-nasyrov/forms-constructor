@@ -13,9 +13,16 @@ class FormsConstructor {
                     renderTo: '#ws_cp-body',
                     beforeLabel: 'before',
                     afterLabel: 'after',
-                    dataList: {
-                        id: '',
-                        values: [1, 2, 1488, 4, 5, 69, 7, 4.2, 9, 0],
+                    // dataList: {
+                    //     id: '',
+                    //     values: [1, 2, 1488, 4, 5, 69, 7, 4.2, 9, 0],
+                    // },
+                    handler: event => {
+                        console.log(event.target.id);
+                    },
+                    listeners: {
+                        mouseenter: e => (e.target.style.background = 'red'),
+                        mouseleave: e => (e.target.style.background = '#fafafa'),
                     },
                     name: 'testr',
                     readOnly: false,
@@ -23,7 +30,8 @@ class FormsConstructor {
                     max: 30,
                     step: 1,
                     value: 1,
-                    style: { height: '30px', width: '100px' },
+                    style: { height: '30px', width: '100px', background: '#fafafa', color: '#3c3c3c', border: '1px solid orange' },
+                    // style: 'height: 30px; width: 100px; background: darkorange; color: white',
                 },
                 {
                     type: 'range',
