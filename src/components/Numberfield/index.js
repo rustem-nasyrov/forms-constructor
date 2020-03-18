@@ -1,95 +1,84 @@
-/**
- * @description
- * @author Rustem Nasyrov
- * @date 2020-03-16
- * @class Numberfield
- */
+'use strict';
+
+import EventHandler from '../../Utils/EventManager';
+
 class Numberfield {
     static dom = null;
 
-    /**
-     *Creates an instance of Numberfield.
-     * @author Rustem Nasyrov
-     * @date 2020-03-16
-     * @param {*} options
-     * @memberof Numberfield
-     */
     constructor(options) {
-        let { type = 'number', id, renderTo, dataList = null } = options;
+        let { type = 'number', id, renderTo, dataList = null, listeners = null, handler = null } = options;
         if (type !== 'number') return;
         if (!renderTo) throw new Error(`renderTo does not specified!`);
         let numberField = document.createElement('input');
+
         this.dom = numberField;
         this.initConfig(options);
+
         document.querySelector(renderTo).appendChild(numberField);
         if (!id) {
             id = this.generateId(renderTo);
             this.id = id;
             this.dom.id = id;
         }
+        if (listeners || handler) new EventHandler({ listeners, handler, component: numberField });
         this.createDataList(dataList);
     }
+    getStyleString(styles) {
+        return Object.keys(styles)
+            .map(elem => `${elem}: ${styles[elem]}`)
+            .join('; ')
+            .trim();
+    }
 
-    /**
-     * @description
-     * @author Rustem Nasyrov
-     * @date 2020-03-16
-     * @param {*} options
-     * @memberof Numberfield
-     */
     initConfig(options) {
         let elem = this.dom;
 
         for (const option in options) {
-            if (option !== 'dataList') {
-                let getOptionName = (option + '').charAt(0).toUpperCase() + option.slice(1),
-                    getOption = 'get' + getOptionName,
-                    setOption = 'set' + getOptionName;
-                let optionValue = options[option];
+            switch (option) {
+                // Skip datalist option if exists
+                case 'dataList':
+                    continue;
+                // Styling
+                case 'style':
+                    let styles = options[option];
+                    if (typeof styles === 'string') {
+                        elem[option] = this[option] = styles;
+                    }
+                    if (typeof styles === 'object') {
+                        elem[option] = this[option] = this.getStyleString(styles);
+                    }
+                    break;
+                // Other component properties
+                default:
+                    let getOptionName = (option + '').charAt(0).toUpperCase() + option.slice(1),
+                        getOption = 'get' + getOptionName,
+                        setOption = 'set' + getOptionName;
+                    let optionValue = options[option];
 
-                this[option] = optionValue;
-                elem[option] = optionValue;
-                // Create getter methods
-                this[getOption] = function() {
-                    return this[option];
-                };
-                elem[getOption] = function() {
-                    return elem[option];
-                };
-                // Create setter methods
-                this[setOption] = function(val) {
-                    this[option] = val;
-                };
-                elem[setOption] = function(val) {
-                    elem[option] = val;
-                };
-            } else {
-                continue;
+                    elem[option] = this[option] = optionValue;
+                    // Create getter methods
+                    this[getOption] = function() {
+                        return this[option];
+                    };
+                    elem[getOption] = function() {
+                        return elem[option];
+                    };
+                    // Create setter methods
+                    this[setOption] = function(val) {
+                        this[option] = val;
+                    };
+                    elem[setOption] = function(val) {
+                        elem[option] = val;
+                    };
             }
         }
     }
 
-    /**
-     * @description
-     * @author Rustem Nasyrov
-     * @date 2020-03-16
-     * @returns
-     * @memberof Numberfield
-     */
     generateId() {
         let id = `${this.dom.parentNode.id}-numberfield-${document.querySelectorAll('input[type=number]').length}`;
         this.id = id;
         if (this.dom.parentNode) return id;
     }
-
-    /**
-     * @description
-     * @author Rustem Nasyrov
-     * @date 2020-03-16
-     * @param {*} dataList
-     * @returns
-     * @memberof Numberfield
-     */
     createDataList(dataList) {
         if (!dataList) return;
         let dataListElem = document.createElement('datalist'),
