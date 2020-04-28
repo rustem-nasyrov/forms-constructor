@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Constructor</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        'use strict';
+        new FormsConstructor({
+            el: '#app',
+            mode: 'output',
+            form: {
+                label: 'Моя первая форма',
+                name: 'test-form',
+                id: 'test',
+                method: 'post',
+                items: [
+                    {
+                        type: 'fieldset',
+                        label: 'Аккаунт',
+                        name: 'user-address',
+                        items: [
+                            {
+                                type: 'text',
+                                label: 'login',
+                            },
+                            {
+                                type: 'text',
+                                label: 'e-mail',
+                            },
+                        ],
+                    },
+                    {
+                        type: 'fieldset',
+                        label: 'Данные пользователя',
+                        name: 'user-info',
+                        items: [
+                            {
+                                type: 'text',
+                                label: 'Фамилия',
+                            },
+                            {
+                                type: 'text',
+                                label: 'Имя',
+                            },
+                        ],
+                    },
+                    {
+                        type: 'combo',
+                        label: 'List',
+                    },
+                    {
+                        type: 'button',
+                        text: 'Submit',
+                        handler: function () {
+                            alert('Button clicked!');
+                        },
+                    }
+                ],
+            },
+        });
+    </script>
+</body>
+
+</html>

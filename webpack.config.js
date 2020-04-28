@@ -1,64 +1,55 @@
 'use strict';
 const path = require('path'),
-    config = require('./package.json'),
+    webpack = require('webpack'),
+    HTMLWebpackPlugin = require('html-webpack-plugin'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-require('dotenv').config();
-
-const PROD = process.env.NODE_ENV === 'production';
-
 module.exports = {
-    entry: path.resolve(__dirname, config.main),
-    devtool: 'source-map',
-    optimization: {
-        minimize: false,
+    entry: './src/index.js',
+    mode: 'development',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        libraryTarget: 'umd',
+        libraryExport: 'default',
+        globalObject: 'this',
+        filename: 'forms-constructor.min.js',
+        library: 'FormsConstructor',
     },
-    mode: process.env.NODE_ENV,
+    devServer: {
+        contentBase: './dist',
+        compress: true,
+        port: 3000,
+        liveReload: true,
+    },
     watch: true,
     watchOptions: {
         ignored: /node_modules/,
     },
-    output: {
-        path: path.resolve('C:/ws/www/ws5/lib/formsconstructor', './'),
-        filename: PROD ? `${process.env.NAME}.min.js` : `${process.env.NAME}.js`,
-        library: process.env.NAME,
-        libraryExport: 'default',
-        libraryTarget: process.env.TARGET,
-        globalObject: 'this',
-    },
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
-        port: 3000,
-    },
     module: {
         rules: [
             {
-                test: /\.js?$/,
-                exclude: /node_modules/,
-                use: ['babel-loader'],
+                test: /\.html$/i,
+                loader: 'html-loader',
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [
-                    // 'style-loader',
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader',
-                ],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(png|svg|jpe?g|gif)$/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: 'res/img',
-                },
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
             },
         ],
     },
     plugins: [
+        new HTMLWebpackPlugin({
+            inject: 'head',
+            template: './src/index.html',
+            showErrors: true,
+        }),
         new MiniCssExtractPlugin({
-            filename: `./res/css/${process.env.NAME}.min.css`,
+            filename: 'res/css/forms-constructor.min.css',
         }),
     ],
 };
