@@ -1,11 +1,22 @@
 'use strict';
 
-import Form from './components/Form';
+import Components from './components';
 
-export default class FormsConstructor {
+export default class FormsConstructor extends Components {
     constructor(opt) {
-        const { el, form } = opt;
+        const { el, mode = 'output', items = null } = opt;
         let rootElem = document.querySelector(el);
-        if (form) new Form(el, form);
+
+        switch (mode) {
+            case 'builder':
+            case 'constructor':
+                console.log('builder');
+                break;
+            case 'output':
+                super(rootElem, items);
+                break;
+            default:
+                super(rootElem, items);
+        }
     }
 }
