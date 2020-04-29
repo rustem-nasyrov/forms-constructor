@@ -17,6 +17,9 @@ export default class Label {
             case 'fieldset':
                 this.createFieldsetLabel(options);
                 break;
+            case 'input':
+                this.createFieldLabel(options);
+                break;
             default:
                 return;
         }
@@ -24,30 +27,46 @@ export default class Label {
     get labelType() {
         return typeof this.options;
     }
-    createFormLabel(options) {
-        let { text, align = null } = options,
-            labelContainer = document.createElement('div'),
-            labelTextElem = document.createElement('h3');
-
-        labelTextElem.innerText = text;
-
-        labelTextElem.classList.add('form-title__text');
-        labelContainer.classList.add('form-title');
-        labelContainer.style.textAlign = align;
-
-        labelContainer.appendChild(labelTextElem);
-        this.parentElem.appendChild(labelContainer);
-    }
-    createFieldsetLabel(options) {
-        if (this.labelType === 'string') {
-            let labelElem = document.createElement('legend');
-            labelElem.innerText = options;
-            this.parentElem.appendChild(labelElem);
-            return labelElem;
-        }
-        if (this.labelType === 'string') {
-            let labelElem = document.createElement('legend');
-            labelElem.innerText = options;
-        }
-    }
 }
+
+Label.prototype.createFormLabel = function (options) {
+    let { text, align = null } = options,
+        labelContainer = document.createElement('div'),
+        labelTextElem = document.createElement('h3');
+
+    labelTextElem.innerText = text;
+
+    labelTextElem.classList.add('form-title__text');
+    labelContainer.classList.add('form-title');
+    labelContainer.style.textAlign = align;
+
+    labelContainer.appendChild(labelTextElem);
+    this.parentElem.appendChild(labelContainer);
+};
+
+Label.prototype.createFieldsetLabel = function (options) {
+    if (this.labelType === 'string') {
+        let labelElem = document.createElement('legend');
+        labelElem.innerText = options;
+        this.parentElem.appendChild(labelElem);
+        return labelElem;
+    }
+    if (this.labelType === 'string') {
+        let labelElem = document.createElement('legend');
+        labelElem.innerText = options;
+    }
+};
+
+Label.prototype.createFieldLabel = function (options) {
+    let { text, align = 'left' } = options;
+    let labelElem = document.createElement('label');
+    labelElem.for = this.parentElem.id;
+    if (this.labelType == 'string') {
+        labelElem.innerText = options;
+        this.parentElem.parentNode.prepend(labelElem);
+    }
+    if (this.labelType == 'object') {
+        labelElem.innerText = text;
+        labelElem.style.textAlign = align;
+    }
+};
