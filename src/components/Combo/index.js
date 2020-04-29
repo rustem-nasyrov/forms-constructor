@@ -1,7 +1,7 @@
 'use strict';
 
 export default class Combo {
-    constructor() {
+    constructor(el, options) {
         console.log('combo');
     }
 }
