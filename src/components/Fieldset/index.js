@@ -1,23 +1,23 @@
 'use strict';
 
+import Components from '../index';
+import Label from '../Label';
+
 export default class Fieldset {
-    constructor(opt) {
+    parentElem = null;
+    elem = null;
+    constructor(elem, options) {
         // Defining variables
-        let { el, options } = opt,
-            { label = null, name = null } = options;
+        this.parentElem = elem;
+        let { label = null, name = null, items = null } = options;
 
         // DOM
         let fieldsetElem = document.createElement('fieldset');
         this.elem = fieldsetElem;
-        this.elem.id = `${el.parentNode.id}-fieldset-${el.querySelectorAll('fieldset').length}`;
         // Setting options
-        if (label) this.createLabel(label);
 
-        el.appendChild(fieldsetElem);
-    }
-    createLabel(labelText) {
-        let legendElem = document.createElement('legend');
-        legendElem.innerText = labelText;
-        this.elem.appendChild(legendElem);
+        if (label) new Label(this.elem, label);
+        if (items) new Components(this.elem, items);
+        this.parentElem.appendChild(fieldsetElem);
     }
 }
