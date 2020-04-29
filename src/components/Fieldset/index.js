@@ -1,5 +1,7 @@
 'use strict';
-
+// Styles
+import styles from './fieldset.scss';
+// Components
 import Components from '../index';
 import Label from '../Label';
 
