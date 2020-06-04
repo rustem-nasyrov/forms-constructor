@@ -20,6 +20,10 @@ export default class Label {
             case 'input':
                 this.createFieldLabel(options);
                 break;
+            case 'combo':
+            case 'select':
+                this.createFieldLabel(options);
+                break;
             default:
                 return;
         }
@@ -58,9 +62,9 @@ Label.prototype.createFieldsetLabel = function (options) {
 };
 
 Label.prototype.createFieldLabel = function (options) {
-    let { text, align = 'left' } = options;
-    let labelElem = document.createElement('label');
-    labelElem.for = this.parentElem.id;
+    let { text, align = 'left' } = options,
+        labelElem = document.createElement('label');
+    labelElem.setAttribute('for', this.parentElem.id);
     if (this.labelType == 'string') {
         labelElem.innerText = options;
         this.parentElem.parentNode.prepend(labelElem);

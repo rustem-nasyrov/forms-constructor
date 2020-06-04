@@ -1,6 +1,7 @@
 'use strict';
 
 import Components from './components';
+import ConstructorUI from './Constructor';
 
 export default class FormsConstructor extends Components {
     constructor(opt) {
@@ -10,7 +11,7 @@ export default class FormsConstructor extends Components {
         switch (mode) {
             case 'builder':
             case 'constructor':
-                console.log('builder');
+                new ConstructorUI(rootElem);
                 break;
             case 'output':
                 super(rootElem, items);

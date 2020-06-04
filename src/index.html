@@ -11,6 +11,12 @@
     <div id="app"></div>
     <script>
         'use strict';
+        /*
+        new FormsConstructor({
+            el: '#app',
+            mode: 'constructor',
+        });
+        */
         new FormsConstructor({
             el: '#app',
             mode: 'output',
@@ -61,11 +67,34 @@
                                     label: 'Дата рождения',
                                     placeholder: '05.05.1985',
                                 },
+                                {
+                                    type: 'combo',
+                                    label: 'Пол',
+                                    placeholder: 'Выберите ваш пол',
+                                    valueField: 'id',
+                                    displayField: 'capt',
+                                    value: {
+                                        fields: ['id', 'capt'],
+                                        data: [
+                                            { id: 0, capt: 'Мужчина', },
+                                            { id: 1, capt: 'Женщина', },
+                                            { id: 2, capt: 'Другое', },
+                                        ],
+                                    },
+                                },
                             ],
                         },
                         {
                             type: 'combo',
                             label: 'List',
+                            value: {
+                                fields: ['id', 'capt'],
+                                data: [
+                                    { id: 0, capt: 'Мужчина', },
+                                    { id: 1, capt: 'Женщина', },
+                                    { id: 2, capt: 'Другое', },
+                                ],
+                            },
                         },
                         {
                             type: 'button',

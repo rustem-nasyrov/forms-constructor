@@ -7,19 +7,21 @@ export default class Field {
     elem = null;
     constructor(elem, options) {
         let fieldElem = document.createElement('input');
-        // let fieldContainer
+
         let { type = 'text', label = null } = options;
         let fieldElemContainer = document.createElement('div');
 
         this.parentElem = elem;
         this.elem = fieldElem;
-        let fieldsCount = document.querySelectorAll('input').length;
-        this.elem.id = `fc-field-${fieldsCount}-${type}`;
-        fieldElemContainer.id = `fc-field-${fieldsCount}`;
         fieldElem.type = type;
 
         this.applyExistingOptionsToElem(options);
         fieldElemContainer.appendChild(this.elem);
+
+        let fieldsCount = document.querySelectorAll('input').length;
+        this.elem.id = `fc-field-${fieldsCount}-${type}`;
+        fieldElemContainer.id = `fc-field-${fieldsCount}-container`;
+
         if (label) new Label(this.elem, label);
         this.parentElem.appendChild(fieldElemContainer);
     }

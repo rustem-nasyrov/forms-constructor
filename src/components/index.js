@@ -36,6 +36,7 @@ export default class Components {
                 new Button(el, options);
                 break;
             case 'combo':
+            case 'select':
                 new Combo(el, options);
                 break;
             case 'field':
