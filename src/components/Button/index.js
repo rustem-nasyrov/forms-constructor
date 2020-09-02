@@ -1,31 +1,25 @@
-class Button {
-    // private variables
-    #outerHTML = '';
-    // public variables
-    constructor(options) {
-        let { type = null, value = 'Default', handler = null, renderTo } = options;
-        if (!renderTo) throw new Error(`"renderTo" does not specified!`);
+'use strict';
+import EventManager from '../../Utils/EventsManager';
+
+export default class Button {
+    parentElem = null;
+    elem = null;
+    constructor(el, options) {
+        this.parentElem = el;
+        let { type = 'button', text, handler = null } = options;
+        // Button container
+        let buttonElemContainer = document.createElement('div');
+        buttonElemContainer.classList.add('fc-btn-container');
+        // Button
         let buttonElem = document.createElement('button');
-        if (type) buttonElem.setAttribute('type', type);
-        buttonElem.innerText = value;
-        if (handler) this.attachEvent({ elem: buttonElem, type: 'click', func: handler });
-        this.#outerHTML = buttonElem.outerHTML;
-        document.querySelector(renderTo).appendChild(buttonElem);
+        this.elem = buttonElem;
+        buttonElem.innerText = text || 'Button ' + document.querySelectorAll(`#${el.id} button`).length;
+        // Apply created elements to 'el'
+        if (handler) this.applyHandler(handler);
+        buttonElemContainer.appendChild(buttonElem);
+        this.parentElem.appendChild(buttonElemContainer);
     }
-    get html() {
-        return this.#outerHTML;
-    }
-    // Methods
-    // Event setter
-    attachEvent(eventConfig) {
-        let { type = null, func = null, elem = null } = eventConfig;
-        this[`on${type}`] = func;
-        elem && type && func ? elem.addEventListener(type, func) : '';
-    }
-    detachEvent(eventConfig) {
-        let { type = null, func = null, elem = null } = eventConfig;
-        this[`on${type}`] = null;
-        elem && type && func ? elem.removeEventListener(type, func) : '';
+    applyHandler(func) {
+        this.elem.addEventListener('click', func, false);
     }
 }
-export default Button;
