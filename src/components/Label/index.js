@@ -1,0 +1,75 @@
+// @ts-nocheck
+'use strict';
+
+export default class Label {
+  parentElem = null;
+  options = null;
+
+  constructor(el, options) {
+    this.parentElem = el;
+    this.options = options;
+
+    const nodeType = el.nodeName.toLowerCase();
+
+    switch (nodeType) {
+      case 'form':
+        this.createFormLabel(options);
+        break;
+      case 'fieldset':
+        this.createFieldsetLabel(options);
+        break;
+      case 'input':
+        this.createFieldLabel(options);
+        break;
+      case 'combo':
+      case 'select':
+        this.createFieldLabel(options);
+        break;
+      default:
+        return;
+    }
+  }
+  get labelType() {
+    return typeof this.options;
+  }
+  createFormLabel(options) {
+    let { text, align = null } = options,
+      labelContainer = document.createElement('div'),
+      labelTextElem = document.createElement('h3');
+
+    labelTextElem.innerText = text;
+
+    labelTextElem.classList.add('form-title__text');
+    labelContainer.classList.add('form-title');
+    labelContainer.style.textAlign = align;
+
+    labelContainer.appendChild(labelTextElem);
+    this.parentElem.appendChild(labelContainer);
+  }
+
+  createFieldsetLabel(options) {
+    if (this.labelType === 'string') {
+      let labelElem = document.createElement('legend');
+      labelElem.innerText = options;
+      this.parentElem.appendChild(labelElem);
+      return labelElem;
+    }
+    if (this.labelType === 'string') {
+      let labelElem = document.createElement('legend');
+      labelElem.innerText = options;
+    }
+  }
+  createFieldLabel(options) {
+    let { text, align = 'left' } = options,
+      labelElem = document.createElement('label');
+    labelElem.setAttribute('for', this.parentElem.id);
+    if (this.labelType == 'string') {
+      labelElem.innerText = options;
+      this.parentElem.parentNode.prepend(labelElem);
+    }
+    if (this.labelType == 'object') {
+      labelElem.innerText = text;
+      labelElem.style.textAlign = align;
+    }
+  }
+}
